@@ -17,12 +17,19 @@ public class Student extends User {
 
     @Override
     public void newCommand(String line) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String[] tokens = line.split(" ");
+        if("command1".equals(tokens[0].toLowerCase())) {
+            
+        } else if("command2".equals(tokens[0].toLowerCase())) {
+            
+        } else {
+            System.out.println("You are not logged in as an authenticated user.");
+        }
     }
 
     @Override
     public void printHelp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("<Some command help for students>");
     }
     
 }

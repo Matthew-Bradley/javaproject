@@ -16,6 +16,12 @@ import java.util.Scanner;
 public class JavaProject {
     static ArrayList<User> users = new ArrayList<>();
     static ArrayList<Course> courses = new ArrayList<>();
+    
+    //course array can be accessed from anywhere as:
+    //"JavaProject.courses"
+    //might move to handing out resources to admin, who attaches students
+    //and professors in the future, if I can figure it out, but this works
+    //pretty well
 
     /**
      * @param args the command line arguments
