@@ -23,12 +23,26 @@ public class Admin extends User{
     @Override
     public void newCommand(String line) {
         String[] tokens = line.split(" ");
-        if("command1".equals(tokens[0].toLowerCase())) {
-            
+        if("create".equals(tokens[0].toLowerCase()) && tokens.length == 2) {
+            if("student".equals(tokens[1].toLowerCase())) {
+                System.out.println("Sorry. Unimplemented.");
+                //TODO implement
+                
+            } else if("professor".equals(tokens[1].toLowerCase())) {
+                System.out.println("Sorry. Unimplemented.");
+                //TODO implement
+                
+            } else if("course".equals(tokens[1].toLowerCase())) {
+                System.out.println("Sorry. Unimplemented.");
+                //TODO implement
+                
+            } else {
+                System.out.println("Unknown type \"" + tokens[1] +"\"");
+            }
         } else if("command2".equals(tokens[0].toLowerCase())) {
             
         } else {
-            System.out.println("You are not logged in as an authenticated user.");
+            System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
         }
     }
 

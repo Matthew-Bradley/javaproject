@@ -101,7 +101,7 @@ public class JavaProject {
                 } else if(user != null)
                     user.newCommand(line);
                 else
-                    System.out.println("Unknown Command. Try \"help\"");
+                    System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
                                 
             }
             
