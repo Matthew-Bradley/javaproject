@@ -39,73 +39,106 @@ public class JavaProject {
                 String line = scan.nextLine();
                 String[] tokens = line.split(" ");
                 
-                if("exit".equals(tokens[0].toLowerCase()))//series of if statements should probably be replaced, perhaps with a pattern
-                    break;
-                else if("help".equals(tokens[0].toLowerCase())) {
-                    System.out.println("Basic Commands:");
-                    System.out.println("exit: Exit the application.");
-                    System.out.println("help: Print this help information.");
-                    System.out.println("login: Login to a user account.");
-                    System.out.println("logout: log out from a user account.");
-                    
-                    if(user != null) {
-                        System.out.println("User specific help:");
-                        user.printHelp();
+                if("exit".equals(tokens[0].toLowerCase())) {
+                    if (tokens.length > 1) {
+                        System.out.println("Incorrect syntax.");
+                        System.out.println("Usage: exit");
                     } else {
-                        System.out.println("Additional commands are available to authenticated users.");
+                        break;
+                    }
+                } else if("help".equals(tokens[0].toLowerCase())) {
+                    if (tokens.length > 1) {
+                        System.out.println("Incorrect syntax.");
+                        System.out.println("Usage: logout");
+                    } else {
+                        System.out.println("Basic Commands:");
+                        System.out.println("exit: Exit the application.");
+                        System.out.println("help: Print this help information.");
+                        System.out.println("login: Login to a user account.");
+                        System.out.println("logout: log out from a user account.");
+
+                        if(user != null) {
+                            System.out.println("User specific help:");
+                            user.printHelp();
+                        } else {
+                            System.out.println("Additional commands are available to authenticated users.");
+                        }
                     }
                 } else if("login".equals(tokens[0].toLowerCase())) {
-                    if(user == null){
-                        System.out.println("Enter Username:");
-                        String username = scan.nextLine();
-                        
-                        User potenUser = null;
-                        for(User use : users) {
-                            if(use.getUserName().compareTo(username) == 0) {
-                                potenUser = use;
-                                break;
-                            }
-                        }
-                        
-                        if(potenUser != null) {
-                            System.out.println("Enter Password:");
-                            String password = scan.nextLine();
-                            
-                            if(potenUser.checkPassword(password)) {
-                                user = potenUser;
-                                System.out.println("Welcome " + user.getUserName() + "!");
+                    if (tokens.length > 1) {
+                        System.out.println("Incorrect syntax.");
+                        System.out.println("Usage: login");
+                    } else {
+                        if (user == null) {
+                            System.out.println("Enter Username:");
+                            String userName = scan.nextLine();
+
+                            User potenUser = JavaProject.getUserFromName(userName);
+
+                            if(potenUser != null) {
+                                System.out.println("Enter Password:");
+                                String password = scan.nextLine();
+
+                                if(potenUser.checkPassword(password)) {
+                                    user = potenUser;
+                                    System.out.println("Welcome " + user.getUserName() + "!");
+                                } else {
+                                    System.out.println("Password incorrect.");
+                                }
                             } else {
-                                System.out.println("Password incorrect.");
+                                System.out.println("User not found.");
                             }
                         } else {
-                            System.out.println("User not found.");
+                            System.out.println("You are already logged in, " + user.getUserName() + ".");
+                            System.out.println("See \"help\" for information on logging out");
                         }
-                    } else {
-                        System.out.println("You are already logged in, " + user.getUserName() + ".");
-                        System.out.println("See \"help\" for information on logging out");
-                    } 
+                    }
                 } else if("logout".equals(tokens[0].toLowerCase())) {
-                    if (user != null) {
-                        System.out.println("Are you sure you want to logout? (\"Yes\" to log out)");
-                        String response = scan.nextLine();
-                        
-                        if(response.compareTo("Yes") == 0){
-                            user = null;
-                            System.out.println("You have been logged out.");
-                        } else {
-                            System.out.println("You must enter \"Yes\" to log out.");
-                        }
+                    if (tokens.length > 1) {
+                        System.out.println("Incorrect syntax.");
+                        System.out.println("Usage: logout");
                     } else {
-                        System.out.println("You are not logged in as an authenticated user.");
+                        if (user != null) {
+                            System.out.println("Are you sure you want to logout? (\"Yes\" to log out)");
+                            String response = scan.nextLine();
+
+                            if(response.compareTo("Yes") == 0){
+                                user = null;
+                                System.out.println("You have been logged out.");
+                            } else {
+                                System.out.println("You must enter \"Yes\" to log out.");
+                            }
+                        } else {
+                            System.out.println("You are not logged in as an authenticated user.");
+                        }
                     }
                 } else if(user != null)
                     user.newCommand(line);
                 else
-                    System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
-                                
+                    System.out.println("Unknown Command \"" + line + "\". Try \"help\"");                  
             }
-            
         }
     }
     
+    static User getUserFromName(String name) {
+        User temp = null;
+        
+        for (User use : JavaProject.users) {
+            if (use.getUserName().compareTo(name) == 0)
+                temp = use;
+        }
+        
+        return temp;
+    }
+    
+    static Course getCourseFromName(String name) {
+        Course temp = null;
+        
+        for (Course course : JavaProject.courses) {
+            if (course.getName().compareTo(name) == 0)
+                temp = course;
+        }
+        
+        return temp;
+    }
 }
