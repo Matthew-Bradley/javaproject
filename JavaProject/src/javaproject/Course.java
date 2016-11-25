@@ -20,13 +20,13 @@ class Course {
         this.name  = name;
     }
     
-    public void addStudent(Student student) {
-        this.students.add(student);
+    public void addStudent(String name) {
+        this.students.add((Student) JavaProject.getUserFromName(name));
     }
     
-    public boolean checkStudent(Student student) {
+    public boolean checkStudent(String name) {
         for (Student stu : students) {
-            if(student == stu) {
+            if(name.compareTo(stu.getUserName()) == 0) {
                 return true;
             }
         }
@@ -34,20 +34,32 @@ class Course {
         return false;
     }
     
-    public void addAssignment(Student student, String name, Double mark) {
-        this.assignments.add(new Assignment(student, name, mark));
+    public boolean checkAssignmentIsDuplicate(String userName, String name) {
+        for (Assignment assign : assignments) {
+            if(name.compareTo(assign.getName()) == 0 && userName.compareTo(assign.getStudentName()) == 0) {
+                return true;
+            }
+        }
+        
+        return false;
     }
     
-    public void printMarks(Student student) {
+    public void addAssignment(String studentName, String name, Double mark) {
+        this.assignments.add(new Assignment((Student) JavaProject.getUserFromName(studentName), name, mark));
+    }
+    
+    public void printMarks(String name) {
+        Student student = (Student) JavaProject.getUserFromName(name);
+        
         if (student != null) { // if student is unspecified, print all students
             for (Assignment assign : assignments) {
-                if(assign.getName().compareTo(student.getUserName()) == 0) {
+                if(assign.getStudentName().compareTo(student.getUserName()) == 0) {
                     System.out.println("Assignment: " + assign.getName() + "\tMark: " + assign.getMark());
                 }
             }
         } else {
             for (Assignment assign : assignments) {
-                System.out.println("Sudent: " + assign.getStudentName() + "Assignment: " + assign.getName() + "\tMark: " + assign.getMark());
+                System.out.println("Student: " + assign.getStudentName() + "\tAssignment: " + assign.getName() + "\tMark: " + assign.getMark());
             }
         }
     }

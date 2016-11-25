@@ -81,7 +81,17 @@ public class Admin extends User{
                 } else {
                     System.out.println("Unknown type \"" + tokens[1] +"\".");
                 }
-            }            
+            } 
+        } else if("show_courses".equals(tokens[0].toLowerCase())) {
+            System.out.println("Courses:");
+            for(Course core : JavaProject.courses) {
+                System.out.println(core.getName());
+            }
+        } else if("show_users".equals(tokens[0].toLowerCase())) {
+            System.out.println("Users:");
+            for(User use : JavaProject.users) {
+                System.out.println("Username: " + use.getUserName() + " Type: " + use.getRole());
+            }
         } else {
             System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
         }
@@ -89,14 +99,24 @@ public class Admin extends User{
 
     @Override
     public void printHelp() {
-        System.out.println("Create:");
+        System.out.println("Create");
+        System.out.println("    -Creates various objects. Usage:");
         System.out.println("    create student <username> <password>");
         System.out.println("    create professor <username> <password>");
         System.out.println("    create course <name>");
+        System.out.println("show_courses");
+        System.out.println("    -Shows all courses.");
+        System.out.println("show_users");
+        System.out.println("    -Shows all users.");
     }
 
     @Override
     public void logout() {
         //nothing to be done
+    }
+
+    @Override
+    public String getRole() {
+        return "Admin";
     }
 }

@@ -44,11 +44,24 @@ public class Professor extends User{
         } else if("show_users".equals(tokens[0].toLowerCase())) {
             System.out.println("Users:");
             for(User use : JavaProject.users) {
-                System.out.println("Username: " + use.getUserName() + " Type: " + use.getClass());
+                System.out.println("Username: " + use.getUserName() + " Type: " + use.getRole());
             }
         } else if("show_assignments".equals(tokens[0].toLowerCase())) {
             if(selectedCourse != null) { // check if a course is selected
                 selectedCourse.printMarks(null);
+            } else {
+                System.out.println("You must select a course.");
+            }
+        } else if("show_enrolled_students".equals(tokens[0].toLowerCase())) {
+            if(selectedCourse != null) {
+                System.out.println("Students:");
+                for(User use : JavaProject.users) {
+                    if(use instanceof Student){
+                        if(selectedCourse.checkStudent(use.getUserName())) {
+                            System.out.println(use.getUserName());
+                        }
+                    }
+                }
             } else {
                 System.out.println("You must select a course.");
             }
@@ -61,7 +74,11 @@ public class Professor extends User{
                         System.out.println("Student must exist.");
                     } else {
                         if(JavaProject.getUserFromName(tokens[1]) instanceof Student) { // check specified user is indeed a student
-                            selectedCourse.addStudent((Student) JavaProject.getUserFromName(tokens[1]));
+                            if(!selectedCourse.checkStudent(tokens[1])) {
+                                selectedCourse.addStudent(tokens[1]);
+                            } else {
+                                System.out.println("Student is already enrolled in selected course.");
+                            }
                         } else {
                             System.out.println("You must specify a student.");
                         }
@@ -79,8 +96,12 @@ public class Professor extends User{
                         System.out.println("Student must exist, and assignment name and mark must be valid.");
                     } else {
                         if(JavaProject.getUserFromName(tokens[1]) instanceof Student) { // check that a student was specified
-                            if(selectedCourse.checkStudent((Student) JavaProject.getUserFromName(tokens[1]))) { // check that the student is in the selected course
-                                selectedCourse.addAssignment((Student) JavaProject.getUserFromName(tokens[1]), tokens[2], Double.parseDouble(tokens[3]));
+                            if(selectedCourse.checkStudent(tokens[1])) { // check that the student is in the selected course
+                                if(!selectedCourse.checkAssignmentIsDuplicate(tokens[1], tokens[2])) {
+                                    selectedCourse.addAssignment(tokens[1], tokens[2], Double.parseDouble(tokens[3]));
+                                } else {
+                                    System.out.println("Selected course already contains an assignment with that name for that student.");
+                                }
                             } else {
                                 System.out.println("Student must be in selected course.");
                             }
@@ -108,6 +129,8 @@ public class Professor extends User{
         System.out.println("    -Shows all users.");
         System.out.println("show_assignments");
         System.out.println("    -Shows all assignments for selected course.");
+        System.out.println("show_enrolled_students");
+        System.out.println("    -Shows all students in a selected course.");
         System.out.println("add_student <username>");
         System.out.println("mark <student username> <assignment name> <grade>");
         System.out.println("    -Adds a mark for an assignment for the specified student with the specified grade.");
@@ -125,5 +148,10 @@ public class Professor extends User{
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    @Override
+    public String getRole() {
+        return "Professor";
     }
 }

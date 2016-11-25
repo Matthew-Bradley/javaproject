@@ -32,6 +32,13 @@ public class JavaProject {
         
         users.add(Admin.getInstance());
         
+        users.add(new Professor("prof1", "pass"));
+        users.add(new Professor("prof2", "pass"));
+        users.add(new Student("stud1", "pass"));
+        users.add(new Student("stud2", "pass"));
+        courses.add(new Course("course1"));
+        courses.add(new Course("course2"));
+        
         System.out.println("Welcome. For help, type \"help\" and press enter.");
         
         while (true)
@@ -77,7 +84,7 @@ public class JavaProject {
                             System.out.println("User not found.");
                         }
                     } else {
-                        System.out.print("You are already logged in.");
+                        System.out.println("You are already logged in.");
                     }
                 } else if("logout".equals(tokens[0].toLowerCase())) {
                     if (user != null) {

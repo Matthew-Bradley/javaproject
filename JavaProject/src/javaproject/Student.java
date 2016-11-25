@@ -20,16 +20,17 @@ public class Student extends User {
         String[] tokens = line.split(" ");
         if("print_marks".equals(tokens[0].toLowerCase())) {
             for(Course core : JavaProject.courses) {
-                if (core.checkStudent(this)){
+                if(core.checkStudent(this.getUserName())){
                     System.out.println("For course: " + core.getName());
                 }
-                
-                core.printMarks(this);
+                core.printMarks(this.getUserName());
             }
         } else if("show_courses".equals(tokens[0].toLowerCase())) {
             System.out.println("Courses:");
             for(Course core : JavaProject.courses) {
-                System.out.println(core.getName());
+                if(core.checkStudent(this.getUserName())) {
+                    System.out.println(core.getName());
+                }
             }
         } else {
             System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
@@ -39,7 +40,7 @@ public class Student extends User {
     @Override
     public void printHelp() {
         System.out.println("show_courses");
-        System.out.println("    -Shows all courses.");
+        System.out.println("    -Shows all enrolled courses.");
         System.out.println("print_marks");
         System.out.println("    -Shows all marks on all assignments in all courses.");
     }
@@ -47,6 +48,11 @@ public class Student extends User {
     @Override
     public void logout() {
         //nothing to do
+    }
+
+    @Override
+    public String getRole() {
+        return "Student";
     }
     
 }
