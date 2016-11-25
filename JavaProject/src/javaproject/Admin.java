@@ -33,51 +33,55 @@ public class Admin extends User{
     public void newCommand(String line) {
         String[] tokens = line.split(" ");
         if("create".equals(tokens[0].toLowerCase())) {
-            if(tokens.length < 2) {
+            if(tokens.length < 2) { //check that a type was specified
                 System.out.println("You need to specify something to create.");
             } else {
-                if("student".equals(tokens[1].toLowerCase())) {
-                    
-                    
-                    
-                    /*
-                    if(true) {
-                        System.out.println("Insufficient or invalid parameters supplied.");
-                        System.out.println("Usage: create student <username> <password>");
+                if("student".equals(tokens[1].toLowerCase())) { //check if it was a student
+                    if(tokens.length < 4) { //make sure a username and password were specified
+                        System.out.println("You need to specify a username and password.");
                     } else {
-                        User temp = new Student(tokens[2], tokens[3]);
+                        if(tokens[2].length() == 0 || tokens[3].length() == 0){ // make sure username an password are nonzero
+                            System.out.println("You need to specify a username and password.");
+                        } else {
+                            if(JavaProject.getUserFromName(tokens[2]) == null) { // make sure user doesn't already exist
+                                JavaProject.users.add(new Student(tokens[2], tokens[3]));
+                            } else {
+                                System.out.println("User \"" + tokens[2] + "\" already exists.");
+                            }
+                        }
                     }
-                    */
-                } else if("professor".equals(tokens[1].toLowerCase())) {
-                    
-                    
-                    
-                    /*
-                    if(true) {
-                        System.out.println("Insufficient or invalid parameters supplied.");
-                        System.out.println("Usage: create professor <username> <password>");
+                } else if("professor".equals(tokens[1].toLowerCase())) { //check if it was a professor
+                    if(tokens.length < 4) { //make sure a username and password were specified
+                        System.out.println("You need to specify a username and password.");
                     } else {
-                        JavaProject.users.add(new Professor(tokens[2], tokens[3]));
+                        if(tokens[2].length() == 0 || tokens[3].length() == 0){ // make sure username an password are nonzero
+                            System.out.println("You need to specify a username and password.");
+                        } else {
+                            if(JavaProject.getUserFromName(tokens[2]) == null) { // make sure user doesn't already exist
+                                JavaProject.users.add(new Professor(tokens[2], tokens[3]));
+                            } else {
+                                System.out.println("User \"" + tokens[2] + "\" already exists.");
+                            }
+                        }
                     }
-                    */
-                } else if("course".equals(tokens[1].toLowerCase())) {
-                    
-                    
-                    
-                    /*
-                    if(true) {
-                        System.out.println("Insufficient or invalid parameters supplied.");
-                        System.out.println("Usage: create course <name>");
+                } else if("course".equals(tokens[1].toLowerCase())) { //check if it was a course
+                    if(tokens.length < 3) { //make sure name was specified
+                        System.out.println("You need to specify a name for the course.");
                     } else {
-                        JavaProject.courses.add(new Course(tokens[2]));
+                        if(tokens[2].length() == 0){ // make sure name is nonzero
+                            System.out.println("You need to specify a name for the course.");
+                        } else {
+                            if(JavaProject.getCourseFromName(tokens[2]) == null) { // make sure course doesn't already exist
+                                JavaProject.courses.add(new Course(tokens[2]));
+                            } else {
+                                System.out.println("Course \"" + tokens[2] + "\" already exists.");
+                            }
+                        }
                     }
-                    */
                 } else {
                     System.out.println("Unknown type \"" + tokens[1] +"\".");
                 }
-            }
-        } else if("dummyCommand".equals(tokens[0].toLowerCase())) {
-            
+            }            
         } else {
             System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
         }
@@ -85,6 +89,14 @@ public class Admin extends User{
 
     @Override
     public void printHelp() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Create:");
+        System.out.println("    create student <username> <password>");
+        System.out.println("    create professor <username> <password>");
+        System.out.println("    create course <name>");
+    }
+
+    @Override
+    public void logout() {
+        //nothing to be done
     }
 }

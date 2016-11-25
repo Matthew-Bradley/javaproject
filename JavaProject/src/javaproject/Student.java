@@ -18,18 +18,35 @@ public class Student extends User {
     @Override
     public void newCommand(String line) {
         String[] tokens = line.split(" ");
-        if("command1".equals(tokens[0].toLowerCase())) {
-            
-        } else if("command2".equals(tokens[0].toLowerCase())) {
-            
+        if("print_marks".equals(tokens[0].toLowerCase())) {
+            for(Course core : JavaProject.courses) {
+                if (core.checkStudent(this)){
+                    System.out.println("For course: " + core.getName());
+                }
+                
+                core.printMarks(this);
+            }
+        } else if("show_courses".equals(tokens[0].toLowerCase())) {
+            System.out.println("Courses:");
+            for(Course core : JavaProject.courses) {
+                System.out.println(core.getName());
+            }
         } else {
-            System.out.println("You are not logged in as an authenticated user.");
+            System.out.println("Unknown Command \"" + line + "\". Try \"help\"");
         }
     }
 
     @Override
     public void printHelp() {
-        System.out.println("<Some command help for students>");
+        System.out.println("show_courses");
+        System.out.println("    -Shows all courses.");
+        System.out.println("print_marks");
+        System.out.println("    -Shows all marks on all assignments in all courses.");
+    }
+
+    @Override
+    public void logout() {
+        //nothing to do
     }
     
 }
