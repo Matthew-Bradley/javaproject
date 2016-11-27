@@ -10,6 +10,11 @@ package javaproject;
  * @author m
  */
 public class Professor extends User{
+    // OVERVIEW
+    // this class is a child class of user,
+    // and provides the commands which a professor would have access to
+    // such as managing grades, courses, and assignments
+    
     Course selectedCourse = null;
 
     public Professor(String userName, String password) {
@@ -17,7 +22,20 @@ public class Professor extends User{
     }
 
     @Override
-    public void newCommand(String line) {
+    public void newCommand(String line) {      
+        // REQUIRES
+        // string from command line
+        // EFFECTS
+        // depending on command, will return a different output
+        // commands available are :
+        // select course - change "selected" course
+        // show course - shows a single course
+        // show courses - lists all courses
+        // show users - lists all users
+        // show assignments - lists all assignments
+        // show enrolled students - lists students currently enrolled in classes
+        // add student - adds a student to selected course
+
         String[] tokens = line.split(" ");
         if("select_course".equals(tokens[0].toLowerCase())) {
             if(tokens.length != 2) { // check that a course was specified
@@ -152,6 +170,8 @@ public class Professor extends User{
 
     @Override
     public String getRole() {
+        // EFFECTS
+        // returns the role of the user (professor)
         return "Professor";
     }
 }
