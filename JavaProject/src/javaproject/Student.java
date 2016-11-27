@@ -20,6 +20,7 @@ public class Student extends User {
     // s.getRole.equals("Student") &&
     // s.getUserName() == this.userName &&
     // s.checkPassword == true
+    
     public Student(String userName, String password) {
         super(userName, password);
     }

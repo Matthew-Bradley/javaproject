@@ -15,6 +15,12 @@ public class Professor extends User{
     // and provides the commands which a professor would have access to
     // such as managing grades, courses, and assignments
     
+    // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
+    
+    // s.getRole.equals("Professor") &&
+    // s.getUserName() == this.userName &&
+    // s.checkPassword == true
+    
     Course selectedCourse = null;
 
     public Professor(String userName, String password) {
@@ -173,5 +179,21 @@ public class Professor extends User{
         // EFFECTS
         // returns the role of the user (professor)
         return "Professor";
+    }
+    
+    @Override
+    public String toString(){
+        return "Username: " + this.getUserName() + ", Type of user:" + this.getRole();
+    }
+    
+    public boolean repOk() {
+        String un = this.getUserName();
+        if(!(this.getRole().equals("Professor"))) {
+            return false;
+        }
+        if(!(un instanceof String)){
+            return false;
+        }
+        return true;
     }
 }
