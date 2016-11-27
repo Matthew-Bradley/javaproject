@@ -78,4 +78,19 @@ public class Student extends User {
         return "Student";
     }
     
+    @Override
+    public String toString(){
+        return "Username: " + this.getUserName() + ", Type of user:" + this.getRole();
+    }
+    
+    public boolean repOk() {
+        String un = this.getUserName();
+        if(!(this.getRole().equals("Student"))) {
+            return false;
+        }
+        if(!(un instanceof String)){
+            return false;
+        }
+        return true;
+    }
 }
