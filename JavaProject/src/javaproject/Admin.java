@@ -16,9 +16,10 @@ public class Admin extends User{
     
     // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
     
+    // rep invariant
     // s.getRole.equals("Admin") &&
     // s.getUserName() == this.userName &&
-    // s.checkPassword == true
+    // s.checkPassword('admin') == true
     
     private static final Admin oneTimeInstance = new Admin("Admin", "Admin");
 

@@ -12,6 +12,18 @@ import java.util.ArrayList;
  * @author m
  */
 class Course {
+    
+    // OVERVIEW
+    // the course class can be assigned to students
+    // and contains a list of assignments belonging to the course
+    
+    // AF(c) = { c.getName() == this.name && this.students != null && this.assignments != null }
+    
+    // rep invariant
+    // s.getRole.equals("Professor") &&
+    // s.getUserName() == this.userName &&
+    // s.checkPassword == true
+    
     private String name;
     private ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Assignment> assignments = new ArrayList<>();
@@ -76,5 +88,16 @@ class Course {
      */
     public void setName(String name) {
         this.name = name;
+    }
+    
+        
+    @Override
+    public String toString(){
+        return "Username: ";
+    }
+    
+    public boolean repOk() {
+
+        return true;
     }
 }

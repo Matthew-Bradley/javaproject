@@ -17,6 +17,7 @@ public class Student extends User {
     
     // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
     
+    // rep invariant
     // s.getRole.equals("Student") &&
     // s.getUserName() == this.userName &&
     // s.checkPassword == true

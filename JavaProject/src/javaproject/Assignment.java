@@ -10,6 +10,18 @@ package javaproject;
  * @author m
  */
 class Assignment {
+    // OVERVIEW
+    // the assignment class belongs to a student
+    // and has an assignment name
+    // as well as a grade (mark) associated with it
+    
+    // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
+    
+    // rep invariant
+    // s.getRole.equals("Professor") &&
+    // s.getUserName() == this.userName &&
+    // s.checkPassword == true
+    
     private Student student;
     private String name;
     private Double mark;
@@ -40,5 +52,16 @@ class Assignment {
      */
     public Double getMark() {
         return mark;
+    }
+    
+        
+    @Override
+    public String toString(){
+        return "Username: ";
+    }
+    
+    public boolean repOk() {
+
+        return true;
     }
 }
