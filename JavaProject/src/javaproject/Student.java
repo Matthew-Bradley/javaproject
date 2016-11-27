@@ -21,6 +21,16 @@ public class Student extends User {
 
     @Override
     public void newCommand(String line) {
+        
+        // REQUIRES
+        // string from command line
+        // EFFECTS
+        // depending on command, will return a different output
+        // if the command is print_marks,
+        // will print the student's mark
+        // if the commands is show_courses,
+        // will print list of student's enrolled courses
+        
         String[] tokens = line.split(" ");
         if("print_marks".equals(tokens[0].toLowerCase())) {
             for(Course core : JavaProject.courses) {
@@ -43,6 +53,8 @@ public class Student extends User {
 
     @Override
     public void printHelp() {
+        // EFFECTS 
+        // if user enters the help command, will print list of available functions
         System.out.println("show_courses");
         System.out.println("    -Shows all enrolled courses.");
         System.out.println("print_marks");
@@ -56,6 +68,8 @@ public class Student extends User {
 
     @Override
     public String getRole() {
+        // EFFECTS
+        // returns the role of the user (student)
         return "Student";
     }
     
