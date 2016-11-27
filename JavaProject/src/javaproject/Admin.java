@@ -10,6 +10,10 @@ package javaproject;
  * @author m
  */
 public class Admin extends User{
+    // OVERVIEW
+    // this class is a child class of user,
+    // provides the "admin" interface for managing courses, students, and professors
+    
     private static final Admin oneTimeInstance = new Admin("Admin", "Admin");
 
     private Admin(String userName, String password) {

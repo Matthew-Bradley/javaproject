@@ -15,6 +15,11 @@ public class Student extends User {
     // and provides the commands which a student would have access to
     // such as viewing marks, and showing enrolled courses
     
+    // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
+    
+    // s.getRole.equals("Student") &&
+    // s.getUserName() == this.userName &&
+    // s.checkPassword == true
     public Student(String userName, String password) {
         super(userName, password);
     }
