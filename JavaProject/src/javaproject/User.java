@@ -10,6 +10,10 @@ package javaproject;
  * @author m
  */
 public abstract class User {
+    // OVERVIEW
+    // This class provides the base blueprint for a user 
+    // including username and password
+    
     private String userName;
     private String password;
     
@@ -23,6 +27,10 @@ public abstract class User {
     public abstract void printHelp();
     
     public boolean checkPassword(String password) {
+        // REQUIRES 
+        // String
+        // EFFECTS
+        // returns true if passwords are equal to user's password
         return this.password.compareTo(password) == 0;
     }
 
@@ -30,6 +38,8 @@ public abstract class User {
      * @return the userName
      */
     public String getUserName() {
+        // EFFECTS
+        // returns the user's username
         return userName;
     }
 

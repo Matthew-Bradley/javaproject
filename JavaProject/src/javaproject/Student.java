@@ -10,7 +10,11 @@ package javaproject;
  * @author m
  */
 public class Student extends User {
-
+    // OVERVIEW
+    // this class is a child class of user,
+    // and provides the commands which a student would have access to
+    // such as viewing marks, and showing enrolled courses
+    
     public Student(String userName, String password) {
         super(userName, password);
     }
