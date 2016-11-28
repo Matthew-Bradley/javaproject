@@ -20,9 +20,12 @@ class Course {
     // AF(c) = { c.getName() == this.name && this.students != null && this.assignments != null }
     
     // rep invariant
-    // s.getRole.equals("Professor") &&
-    // s.getUserName() == this.userName &&
-    // s.checkPassword == true
+    // c.addStudent("chris");
+    // c.checkStudent("chris") == true;
+    // c.addAssignment("chris", "assign1", 75.50);
+    // c.checkAssignmentIsDuplicate("chris", "assign1") == true;
+    // c.setName("ele532");
+    // c.getName().equals("ele532");
     
     private String name;
     private ArrayList<Student> students = new ArrayList<>();
@@ -93,11 +96,17 @@ class Course {
         
     @Override
     public String toString(){
-        return "Username: ";
+        return "Course name: " + this.getName();
     }
     
     public boolean repOk() {
-
+        this.addStudent("chris");
+        if(this.checkStudent("chris") == false){
+            return false;
+        }
+        if(this.getName() == null){
+            return false;
+        }
         return true;
     }
 }

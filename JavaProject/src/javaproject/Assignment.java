@@ -15,12 +15,12 @@ class Assignment {
     // and has an assignment name
     // as well as a grade (mark) associated with it
     
-    // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
+    // AF(s) = { s.getStudentName() | this.student instanceof String
+    //           s.getName() | this.name instanceof String
+    //           s.getMark() | this.mark instanceof Double   }
     
     // rep invariant
-    // s.getRole.equals("Professor") &&
-    // s.getUserName() == this.userName &&
-    // s.checkPassword == true
+    // s.getName() != null && s.getMark() != null && s.getStudentName() != null
     
     private Student student;
     private String name;
@@ -57,11 +57,16 @@ class Assignment {
         
     @Override
     public String toString(){
-        return "Username: ";
+        return "Assignment " + this.getName() + " belongs to " + this.getStudentName() + " with mark of " + this.getMark();
     }
     
     public boolean repOk() {
-
+        if(!(this.getName() instanceof String && this.getStudentName() instanceof String)){
+            return false;
+        }
+        if(this.getMark() == null){
+            return false;
+        }
         return true;
     }
 }
