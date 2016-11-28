@@ -24,12 +24,10 @@ public class StudentTest {
     @Test
     public void testGetRole() {
         System.out.println("getRole");
-        Student instance = null;
-        String expResult = "";
+        Student instance = new Student("student","pass");
+        String expResult = "Student";
         String result = instance.getRole();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -38,12 +36,10 @@ public class StudentTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        Student instance = null;
-        String expResult = "";
+        Student instance = new Student("student","pass");
+        String expResult = "Username: student, Type of user:Student";
         String result = instance.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -52,12 +48,10 @@ public class StudentTest {
     @Test
     public void testRepOk() {
         System.out.println("repOk");
-        Student instance = null;
-        boolean expResult = false;
+        Student instance = new Student("student", "pass");
+        boolean expResult = true;
         boolean result = instance.repOk();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
