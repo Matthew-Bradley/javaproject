@@ -10,6 +10,17 @@ package javaproject;
  * @author m
  */
 public class Admin extends User{
+    // OVERVIEW
+    // this class is a child class of user,
+    // provides the "admin" interface for managing courses, students, and professors
+    
+    // AF(s) = { s.getUserName() == this.userName && s.checkPassword == true }
+    
+    // rep invariant
+    // s.getRole.equals("Admin") &&
+    // s.getUserName() == this.userName &&
+    // s.checkPassword('admin') == true
+    
     private static final Admin oneTimeInstance = new Admin("Admin", "Admin");
 
     private Admin(String userName, String password) {
@@ -118,5 +129,21 @@ public class Admin extends User{
     @Override
     public String getRole() {
         return "Admin";
+    }
+    
+    @Override
+    public String toString(){
+        return "Username: " + this.getUserName() + ", Type of user:" + this.getRole();
+    }
+    
+    public boolean repOk() {
+        String un = this.getUserName();
+        if(!(this.getRole().equals("Admin"))) {
+            return false;
+        }
+        if(!(un instanceof String)){
+            return false;
+        }
+        return true;
     }
 }

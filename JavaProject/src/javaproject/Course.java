@@ -12,6 +12,21 @@ import java.util.ArrayList;
  * @author m
  */
 class Course {
+    
+    // OVERVIEW
+    // the course class can be assigned to students
+    // and contains a list of assignments belonging to the course
+    
+    // AF(c) = { c.getName() == this.name && this.students != null && this.assignments != null }
+    
+    // rep invariant
+    // c.addStudent("chris");
+    // c.checkStudent("chris") == true;
+    // c.addAssignment("chris", "assign1", 75.50);
+    // c.checkAssignmentIsDuplicate("chris", "assign1") == true;
+    // c.setName("ele532");
+    // c.getName().equals("ele532");
+    
     private String name;
     private ArrayList<Student> students = new ArrayList<>();
     private ArrayList<Assignment> assignments = new ArrayList<>();
@@ -76,5 +91,22 @@ class Course {
      */
     public void setName(String name) {
         this.name = name;
+    }
+    
+        
+    @Override
+    public String toString(){
+        return "Course name: " + this.getName();
+    }
+    
+    public boolean repOk() {
+        this.addStudent("chris");
+        if(this.checkStudent("chris") == false){
+            return false;
+        }
+        if(this.getName() == null){
+            return false;
+        }
+        return true;
     }
 }
